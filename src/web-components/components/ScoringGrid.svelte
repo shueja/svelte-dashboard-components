@@ -1,6 +1,7 @@
 <script>
     import Node from "./Node.svelte";
     export let selection;
+    export let selectCallback;
     export let cubesScored;
     export let conesScored;
     export let showLinks=true;
@@ -30,7 +31,7 @@
     height:100%;
     width:100%">
     {#each {length:27} as _, i}
-    <Node id={i} selection={selection} cubes={cubesScored.filter(x => x==i).length} cones={conesScored.filter(x => x==i).length}></Node>
+    <Node id={i} selection={selection} on:click={()=>selectCallback(i)} cubes={cubesScored.filter(x => x==i).length} cones={conesScored.filter(x => x==i).length}></Node>
     {/each}
     {#if showLinks}
     {#each leftOfLinks as id}

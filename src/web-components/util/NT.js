@@ -50,12 +50,23 @@ class NT {
             _val = v;
             subs.forEach((fn) => fn(_val));
         };
+
+        const get = () => {
+            return _val;
+        }
         
         const update = (fn) => set(fn(_val));
         const type = () => topicType;
-        const ret = { subscribe, set, update, type};
-        this.ntSubscribers[key] = ret;
-        return ret;
+
+        // We create our store as a function so that it can be passed as a callback where the value to set is the first parameter
+        function store(val) {set(val)}
+        store.subscribe = subscribe;
+        store.set = set;
+        store.get = get;
+        store.update = update;
+        store.type = type;
+        this.ntSubscribers[key] = store;
+        return store;
     }
 
     NTInt(init, key){return this.NTValue(init, key, NetworkTablesTypeInfos.kInteger) }

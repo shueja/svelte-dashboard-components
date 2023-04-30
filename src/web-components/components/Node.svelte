@@ -4,7 +4,7 @@
     export let cubes=0;
     export let cones=0
     let background;
-    $:  {if ($selection == id) { background = "green"; }
+    $:  {if (selection == id) { background = "green"; }
         else if (id >= 0 && id < 9) { background = "lightgray";}
         else if (id % 3 == 1) { background = "purple"; }
         else { background = "yellow" }    
@@ -19,9 +19,10 @@
             grid-column: {id % 9 + 1};
             grid-row: {Math.floor(id/9) + 1};
             box-sizing: border-box"
-    on:click={()=>$selection = id}
+    on:click
     on:keypress={()=>{}}
   >
+  <!-- empty on:click binding above passes click events to be bound on the Node component -->
   <svg viewBox="-2 -2 28 28" style="margin-right: 8px; width:100%; height:100%; pointer-events:none">
     {#if cubes > 1}
     <polygon points="8,8 8,20 20,20, 20,8" style="fill:rgb(150,0,255);stroke-width:1;stroke:rgb(0,0,0)"></polygon>
