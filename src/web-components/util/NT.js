@@ -21,6 +21,7 @@ class NT {
         }
         console.log("new subscriber for", key, "existing", this.ntSubscribers);
         let _val = init;
+        let needsToPublish = false;
         const subs = [];
         let topic = this.nt.createTopic(key, topicType);
         topic.subscribe((value)=>{
@@ -28,10 +29,12 @@ class NT {
                 subs.forEach((fn) => fn(_val));
             }
         );
-        topic.publish();
 
         onDestroy(()=>{
+            if (needsToPublish) {
             topic.unpublish();
+            }
+
             topic.unsubscribe();
         })
         
@@ -46,6 +49,11 @@ class NT {
         };
         
         const set = (v) => {
+            if (!needsToPublish) {
+                topic.publish();
+                console.log("publish")
+                needsToPublish = true;
+            }
             topic.setValue(v);
             _val = v;
             subs.forEach((fn) => fn(_val));
