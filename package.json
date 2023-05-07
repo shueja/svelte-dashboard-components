@@ -25,7 +25,7 @@
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   },
   "dependencies": {
-    "@frc-web-components/fwc": "^1.4.0",
+    "@frc-web-components/fwc": "^1.4.3",
     "ntcore-ts-client": "^0.2.1",
     "sirv-cli": "^2.0.0"
   }
