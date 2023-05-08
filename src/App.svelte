@@ -6,13 +6,16 @@
     import PlumbedGrid from "./PlumbedGrid.svelte";
     import PlumbedChooser from "./PlumbedChooser.svelte";
     import PlumbedField from "./PlumbedField.svelte";
+    import Generated from "./web-components/layout/Generated.svelte";
+    import layout from "./layout.json"
 
 	let count = NT.NTInt(0, "SmartDashboard/count");
 	let time = NT.NTInt(-1, "/DriverDisplay/matchTime");
 </script>
 
-<GridLayout rows={9} columns={12}>
-    <GridItem height={3} x={1} y={1} width={9}>
+<GridLayout rows={9} columns={12} showLines={true}>
+    <Generated json={JSON.stringify(layout)}></Generated>
+    <!-- <GridItem height={3} x={1} y={1} width={9}>
         <PlumbedGrid selectionKey="/DriverDisplay/selection"></PlumbedGrid>
     </GridItem>
     <GridItem height={5} x={10} y={1} width={3}>
@@ -21,10 +24,7 @@
     <GridItem height={1} x={5} y={4} width={1}>	
         <button style="width:100%; height:100%;" on:click={()=>$count =0}>inc</button>
     </GridItem>
-    <GridItem height={1} width={4} x={1} y={4}>
-        <PlumbedChooser table="/SmartDashboard/Auto choices"/>	
-    </GridItem>
     <GridItem height={1} width={4} x={6} y={4}>
         <Timer time={$time}></Timer>
-    </GridItem>
+    </GridItem> -->
 </GridLayout>

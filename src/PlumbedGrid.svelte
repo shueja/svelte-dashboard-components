@@ -18,4 +18,4 @@
 	}
 </script>
 
-<Grid selection={$selection} selectCallback={selection} cubesScored={cubesScored} conesScored={conesScored}></Grid>
+<Grid selection={$selection} selectCallback={(val)=>{console.log(val); $selection = val}} cubesScored={cubesScored} conesScored={conesScored}></Grid>

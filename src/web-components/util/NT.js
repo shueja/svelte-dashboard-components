@@ -19,7 +19,7 @@ class NT {
         if (this.ntSubscribers[key] !== undefined) {
             return this.ntSubscribers[key];
         }
-        console.log("new subscriber for", key, "existing", this.ntSubscribers);
+        //console.log("new subscriber for", key, "existing", this.ntSubscribers);
         let _val = init;
         let needsToPublish = false;
         const subs = [];

@@ -1,11 +1,27 @@
 <script>
-    export let x = 1;
-    export let y = 1;
-    export let height = 1;
-    export let width = 1;
+    export let x = undefined;
+    export let y = undefined;
+    export let height = undefined;
+    export let width = undefined;
+    $: autoPlace = (x === undefined) || (y === undefined)
+    $: autoSize = (height === undefined) || (width === undefined)
+    let css = ""
+    $: {
+        css = ""
+        if (!autoPlace) {
+            css += `grid-column-start:${x}; grid-row-start:${y};`
+        }
+        if (!autoSize) {
+            css += `grid-column-end: span ${width}; grid-row-end: span ${height}`
+        }
 
+    }
 </script>
-
-<div style="grid-column: {x}/ span {width}; grid-row: {y} / span {height}">
+<style>
+    .grid-item {
+        border:2px solid red
+    }
+</style>
+<div class="grid-item" style={css}>
 <slot/>
 </div>

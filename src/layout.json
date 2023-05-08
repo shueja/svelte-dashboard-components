@@ -1,0 +1,43 @@
+{"tabs":[{
+    "name": "drive",
+    "elements": [
+      {
+        "name": "Heading",
+        "type": "gyro",
+        "data": "drive/heading",
+        "layout": {
+          "x":2,
+          "y":5,
+          "width":2,
+          "height":2
+        }
+      },
+      {
+        "name": "Auto Chooser",
+        "type": "chooser",
+        "data": "/SmartDashboard/Auto choices",
+        "layout": {
+            "x":1,
+            "y":4,
+            "width":4,
+            "height":1
+          }
+      },
+      {
+        "name": "Wheel Velocities",
+        "type": "graph",
+        "data": ["drive/leftVelocity", "drive/rightVelocity"],
+        "graph": {
+          "limits": {
+            "x": [0, 10],
+            "y": [-50, 50]
+          }
+        },
+        "layout": {
+          "width":2,
+          "height":2
+        }
+      }
+    ]
+  }
+]}
