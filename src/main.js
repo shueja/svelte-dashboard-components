@@ -1,5 +1,5 @@
 import Main from './Main.svelte';
-import NT from './web-components/util/NT'
+import NT from 'svelte-web-components/util/NT'
 
 function setNTfromURL(){
 	const urlParams = new URLSearchParams(window.location.search);

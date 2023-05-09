@@ -23,6 +23,7 @@
     "svelte": "^3.55.0"
   },
   "dependencies": {
+    "svelte-web-components" : "^1.0.0",
     "@frc-web-components/fwc": "^1.4.3",
     "@rollup/plugin-json": "^6.0.0",
     "ntcore-ts-client": "^0.2.1",

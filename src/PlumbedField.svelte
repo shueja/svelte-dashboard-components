@@ -1,5 +1,5 @@
 <script>
-    import NT from "./web-components/util/NT";
+    import NT from "svelte-web-components/util/NT";
 	import "@frc-web-components/fwc/components/field/field"
     import "@frc-web-components/fwc/components/field/field-robot"
 	export let table;

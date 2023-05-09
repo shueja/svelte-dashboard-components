@@ -15,7 +15,13 @@
   },
   "NetworkTables": {
     "transitory": {
+      "FMSInfo": {
+        "open": true
+      },
       "SmartDashboard": {
+        "Auto choices": {
+          "open": true
+        },
         "Field": {
           "open": true
         },

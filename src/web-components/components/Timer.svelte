@@ -1,5 +1,6 @@
 <script>
-    export let time;
+    export let label;
+    export let value;
     export let max = 135.0;
     export let hms=false;
     export let showBar=true;
@@ -29,7 +30,13 @@
 </style>
 <div class="container" style=" font-size:calc(0.5 * min({w}px,{h}px));"
     bind:clientWidth={w} bind:clientHeight={h}>
-    <div style="height:10%; width:100%"></div>
-    {time === -1 ? "--": `${Math.floor(time / 60).toFixed(0)}:${(time % 60).toFixed(2).toString().padStart(5, '0')}`}
-    <div class="bar" style="width:calc(100% * max(0, min({max == 0 ? 0 : time / max}, 1)));"></div>
+    <div style="height:10%; width:100%; font-size: calc(0.2 * {h}px)">{label}</div>
+    {#if hms}
+    {value === -1 ? "--": `${Math.floor(value / 60).toFixed(0)}:${(value % 60).toFixed(2).toString().padStart(5, '0')}`}
+    {:else}
+    {value === -1 ? "--": value.toFixed(2)}
+    {/if}
+    {#if showBar}
+    <div class="bar" style="width:calc(100% * max(0, min({max == 0 ? 0 : value / max}, 1)));"></div>
+    {/if}
 </div>

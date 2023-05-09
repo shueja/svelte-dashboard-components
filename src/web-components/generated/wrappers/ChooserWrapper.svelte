@@ -1,12 +1,13 @@
 <script>
-    export let table;
+    export let data;
     export let name = "Chooser";
+    export let meta = {};
 
     import NT from "../../../web-components/util/NT";
     import  "@frc-web-components/fwc/components/sendable-chooser"
-    let options = NT.NTStringArray([], `${table.replace(/\/$/, '')}/options`);
-	let selected = NT.NTString("", `${table.replace(/\/$/, '')}/selected`)
-	let active = NT.NTString("", `${table.replace(/\/$/, '')}/active`)
+    let options = NT.NTStringArray([], `${data.replace(/\/$/, '')}/options`);
+	let selected = NT.NTString("", `${data.replace(/\/$/, '')}/selected`)
+	let active = NT.NTString("", `${data.replace(/\/$/, '')}/active`)
 </script>
 
 <frc-sendable-chooser options={$options} active={$active} default={$active} label={name}

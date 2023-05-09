@@ -17,11 +17,11 @@
 
     }
 </script>
-<style>
+<!-- <style>
     .grid-item {
         border:2px solid red
     }
-</style>
+</style> -->
 <div class="grid-item" style={css}>
 <slot/>
 </div>

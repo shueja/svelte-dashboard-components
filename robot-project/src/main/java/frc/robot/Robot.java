@@ -48,6 +48,12 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
     input.button(1, loop).rising().ifHigh(()->{count++; countEntry.set(count);});
+
+    input.button(2, loop).rising().ifHigh(()->SmartDashboard.putString("json", """
+      {"tabs":[{"name":"drive","grid":{"rows":9,"columns":12},"elements":[{"name":"FMS Info","type":"fms-info","data":"SmartDashboard/count","layout":{"x":10,"y":1,"width":3,"height":2},"gyro":{"units":"radians"}},{"name":"Auto Chooser","type":"chooser","data":"/SmartDashboard/Auto choices","layout":{"x":1,"y":4,"width":4,"height":1}},{"name":"Wheel Velocities","type":"graph","data":["drive/leftVelocity","drive/rightVelocity"],"graph":{"limits":{"x":[0,10],"y":[-50,50]}},"layout":{"width":2,"height":2}},{"name":"Scoring Grid","type":"grid","data":"/DriverDisplay/selection","grid":{},"layout":{"width":9,"height":3,"x":1,"y":1}},{"name":"Match Time","type":"timer","data":"/SmartDashboard/matchTime","timer":{},"layout":{"width":3,"height":1,"x":10,"y":3}}]}]}
+      """
+    
+    ));
     countEntry.set(count);
     SmartDashboard.putData(field);
     SmartDashboard.putNumber("matchTime", DriverStation.getMatchTime());
