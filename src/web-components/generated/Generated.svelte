@@ -2,10 +2,13 @@
     import GeneratedTab from "./GeneratedTab.svelte";
     import Ajv2020 from "ajv/dist/2020"
     import * as schema from "./layout.schema.json"
+    import { elementData } from "./elements";
     export let json = "{}";
     console.log(schema)
     const ajv = new Ajv2020()
-
+    console.log(elementData)
+    schema.$defs.element.properties.type.enum = Object.keys(elementData);
+    console.log(schema)
     const parse = ajv.compile(schema)
     let tabs = [];
     $: {
