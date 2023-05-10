@@ -1,9 +1,6 @@
-{"tabs":[{
+{
+  "tabs":[{
     "name": "drive",
-    "grid": {
-      "rows": 9,
-      "columns":12
-    },
     "elements": [
       {
         "name": "FMS Info",
@@ -33,7 +30,7 @@
       {
         "name": "Wheel Velocities",
         "type": "graph",
-        "data": ["drive/leftVelocity", "drive/rightVelocity"],
+        "data": "drive/leftVelocity",
         "graph": {
           "limits": {
             "x": [0, 10],

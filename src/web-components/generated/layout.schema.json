@@ -1,0 +1,81 @@
+{
+    "$id": "https://example.com/layout",
+    "title": "Layout",
+    "description": "A layout for an FRC dashboard",
+    "type": "object",
+    "properties": {
+      "tabs": {
+        "description": "The array of tabs in the layout",
+        "type": "array",
+        "items": {"$ref":"#/$defs/tab"},
+        "minItems": 0
+      }
+    },
+    "required": [ "tabs" ],
+    "$defs": {
+        "tab": {
+            "title": "Tab",
+            "description": "A layout for a single tab",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type":"string"
+                },
+                "elements": {
+                    "type":"array",
+                    "items": {"$ref":"#/$defs/element"}
+                }
+            },
+            "required": ["name", "elements"]
+        },
+        "element": {
+            "type":"object",
+            "properties":{
+                "name" : {
+                    "type":"string"
+                },
+                "type" : {"enum":["fms-info","chooser","timer", "gyro", "grid", "graph"]},
+                "data" : {
+                    "oneOf": [{"type":"string"}, {"type":"array"}]
+                },
+                "layout": {
+                    "$ref": "#/$defs/layout"
+                },
+                "gyro": {"$ref":"#/$defs/meta/gyro"}
+                
+            },
+            "required": ["name", "type", "data"]
+        },
+        "layout":{
+            "properties": {
+            "x": {
+                "type":"number",
+                "minimum":1
+            },
+            "y": {
+                "type":"number",
+                "minimum":1
+            },
+            "width": {
+                "type":"number",
+                "minimum":1
+            },
+            "height": {
+                "type":"number",
+                "minimum":1
+            }
+        }
+        },
+        "meta": {
+            "gyro": {
+                "properties" :{
+                    "units": {
+                        "enum": ["radians", "degrees"]
+                    }
+                }
+
+            }
+        }
+
+      }
+  }
