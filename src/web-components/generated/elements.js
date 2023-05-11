@@ -3,7 +3,8 @@ import GyroWrapper from "./wrappers/GyroWrapper.svelte";
 import DifferentialDrivebaseWrapper from "./wrappers/DifferentialDrivebaseWrapper.svelte";
 import GraphWrapper from "./wrappers/GraphWrapper.svelte";
 import TimerWrapper from "./wrappers/TimerWrapper.svelte";
-import FMSInfoWrapper from "./wrappers/FMSInfoWrapper.svelte"
+import FMSInfoWrapper from "./wrappers/FMSInfoWrapper.svelte";
+import CameraWrapper from "./wrappers/CameraWrapper.svelte"
 
 
 let rawElementData = {
@@ -26,7 +27,13 @@ let rawElementData = {
         component: ChooserWrapper
     },
     "timer":{component: TimerWrapper},
-    "fms-info": {component: FMSInfoWrapper}
+    "fms-info": {component: FMSInfoWrapper},
+    "camera": {
+        component: CameraWrapper,
+        defaultMeta:{
+            "ip":"about:blank"
+        }
+    }
 }
 
 

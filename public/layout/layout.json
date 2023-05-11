@@ -1,0 +1,31 @@
+{
+  "tabs":[{
+    "name": "main",
+    "elements": [
+      {
+        "name": "Camera",
+        "type": "grid",
+        "data": "",
+        "layout": {
+          "x":1,
+          "y":1,
+          "width":9,
+          "height":3
+        },
+	  "camera": {
+          "ip":"blob:https://zssd-platypus.player.camzonecdn.com/cd56db7b-3022-42b2-afc1-68a67f0b27ef"
+	}
+      },
+      {
+        "name": "Auto Chooser",
+        "type": "chooser",
+        "data": "/SmartDashboard/Auto choices",
+        "layout": {
+            "x":1,
+            "y":4,
+            "width":3,
+            "height":1
+          }
+      }
+    ]}
+]}

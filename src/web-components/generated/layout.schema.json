@@ -44,7 +44,7 @@
                 "gyro": {"$ref":"#/$defs/meta/gyro"}
                 
             },
-            "required": ["name", "type", "data"]
+            "required": ["type", "data"]
         },
         "layout":{
             "properties": {
