@@ -1,8 +1,6 @@
 <script>
     export let data;
     export let name = "Chooser";
-    export let meta = {};
-
     import NT from "../../../web-components/util/NT";
     import  "@frc-web-components/fwc/components/sendable-chooser"
     let options = NT.NTStringArray([], `${data.replace(/\/$/, '')}/options`);
