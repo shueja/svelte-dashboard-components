@@ -26,6 +26,7 @@
     "@frc-web-components/fwc": "^1.4.3",
     "@rollup/plugin-json": "^6.0.0",
     "ntcore-ts-client": "^0.2.1",
-    "sirv-cli": "^2.0.2"
+    "sirv-cli": "^2.0.2",
+    "svelte-web-components": "file:./src/web-components"
   }
 }

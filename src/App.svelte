@@ -1,12 +1,12 @@
 <script>
-	import GridLayout from "./web-components/layout/GridLayout.svelte";
-	import NT from "./web-components/util/NT";
+	import GridLayout from "svelte-web-components/layout/GridLayout.svelte";
+	import NT from "svelte-web-components/util/NT";
     
-    import Generated from "./web-components/generated/Generated.svelte";
+    import Generated from "svelte-web-components/generated/Generated.svelte";
     import layout from "../public/layout/layout.json"
     // Add custom elements for code-driven layouts
     import PlumbedGrid from "./PlumbedGrid.svelte";
-    import {addElement} from "./web-components/generated/elements"
+    import {addElement} from "svelte-web-components/generated/elements"
     addElement("grid", PlumbedGrid);
     //let layoutString = "{}"
     async function fetchLayout() {
@@ -30,7 +30,7 @@
 <GridLayout rows={9} columns={12} showLines={false}>
     {#await fetchPromise}
         <p>loading JSON layout</p>
-    {:then layoutString} 
+    {:then layoutString}
         <Generated json={layoutString}></Generated>
     {/await}
     
