@@ -1,6 +1,6 @@
 <script>
-    import "@frc-web-components/fwc/dist/components/basic-fms-info.es"
-    import NT from "../../util/NT";
+    import "@frc-web-components/fwc/components/basic-fms-info"
+    import NT from "svelte-web-components/util/NT";
     export let name;
     export let data;
     export let meta;

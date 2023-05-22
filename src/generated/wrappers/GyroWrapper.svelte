@@ -2,7 +2,7 @@
     export let data;
     export let name = "Gyro";
     console.log(data)
-    import NT from "../../util/NT";
+    import NT from "svelte-web-components/util/NT";
     import  "@frc-web-components/fwc/components/gyro"
     let valueTopic = NT.NTDouble(0.0, data);
     $: console.log($valueTopic)

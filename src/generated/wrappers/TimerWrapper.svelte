@@ -1,6 +1,6 @@
 <script>
-    import Timer from "../../components/Timer.svelte";
-    import NT from "../../util/NT";
+    import Timer from "svelte-web-components/components/Timer.svelte";
+    import NT from "svelte-web-components/util/NT";
     export let name;
     export let data;
     export let meta;

@@ -4,7 +4,7 @@
     "elements": [
       {
         "name": "Camera",
-        "type": "grid",
+        "type": "camera",
         "data": "",
         "layout": {
           "x":1,
@@ -12,9 +12,9 @@
           "width":9,
           "height":3
         },
-	  "camera": {
-          "ip":"blob:https://zssd-platypus.player.camzonecdn.com/cd56db7b-3022-42b2-afc1-68a67f0b27ef"
-	}
+        "meta": {
+              "ip":"https://google.com"
+        }
       },
       {
         "name": "Auto Chooser",

@@ -1,6 +1,13 @@
 import Main from './Main.svelte';
 import NT from 'svelte-web-components/util/NT'
 
+
+// WORKAROUND for immer.js esm (see https://github.com/immerjs/immer/issues/557)
+window.process = {
+	env: {
+		NODE_ENV: "production"
+	}
+};
 function setNTfromURL(){
 	const urlParams = new URLSearchParams(window.location.search);
     const hasTeam = urlParams.has('team');

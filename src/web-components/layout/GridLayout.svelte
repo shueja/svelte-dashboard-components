@@ -24,6 +24,7 @@
 <div bind:clientHeight={gridHeight} bind:clientWidth={gridWidth}
     style="
     display:grid;
+    position:relative;
     width: 100%;
     height: 100%;
     grid-template-columns:{columnsCSS};
