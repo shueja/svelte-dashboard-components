@@ -18,5 +18,5 @@ jobs:
           # Base path for archive files
           path: . # optional, default is .
           # Working directory before zipping
-          directory: ./public # optional, default is .
+          directory: . # optional, default is .
           
