@@ -16,7 +16,7 @@ jobs:
           # Filename for archive
           filename: release.zip # default is release.zip
           # Base path for archive files
-          path: public # optional, default is .
+          path: ./public # optional, default is .
           # Working directory before zipping
           directory: . # optional, default is .
           
