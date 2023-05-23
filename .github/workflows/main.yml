@@ -1,0 +1,20 @@
+name: Zip
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Zip Release
+        # You may pin to the exact commit or the version.
+        # uses: TheDoctor0/zip-release@a24011d8d445e4da5935a7e73c1f98e22a439464
+        uses: TheDoctor0/zip-release@0.7.1
+        with:
+          # Filename for archive
+          filename: release.zip # default is release.zip
+          # Working directory before zipping
+          directory: . # optional, default is .
+          
