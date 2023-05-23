@@ -31,7 +31,7 @@ let rawElementData = {
     "camera": {
         component: CameraWrapper,
         defaultMeta:{
-            "ip":"about:blank"
+            "ip":"https://google.com"
         }
     }
 }

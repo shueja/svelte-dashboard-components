@@ -34,7 +34,7 @@
                 "name" : {
                     "type":"string"
                 },
-                "type" : {"enum":["fms-info","chooser","timer", "gyro", "graph", "camera"]},
+                "type" : {"type":"string"},
                 "data" : {
                     "oneOf": [{"type":"string"}, {"type":"array"}]
                 },

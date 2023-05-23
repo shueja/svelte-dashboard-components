@@ -2,6 +2,8 @@
     export let columns;
     export let rows;
     export let square=true;
+    export let cellHeight = undefined;
+    export let cellWidth = undefined;
     export let showLines;
     let gridWidth;
     let gridHeight;
@@ -9,16 +11,18 @@
     let unitWidth = undefined;
     let columnsCSS;
     let rowsCSS;
-    $: if (!square) {
-        unitHeight = gridHeight / rows;
-        unitWidth = gridWidth / columns;
-        columnsCSS = `repeat(${columns}, ${unitWidth}px)`
-        rowsCSS = `repeat(${rows}, ${unitHeight}px )`
-    } else {
-        unitHeight = gridWidth/columns;
+    $: console.log(gridWidth, gridHeight)
+    $: {gridWidth, gridHeight
+        if (cellWidth == undefined || cellHeight == undefined) {
+            unitHeight = gridWidth/columns;
         unitWidth = gridWidth/columns;
-        columnsCSS = `repeat(${columns}, ${unitHeight}px)`
-        rowsCSS = `repeat(${rows}, ${unitWidth}px)`
+        columnsCSS = `repeat(${columns}, ${unitWidth}px)`
+        } else {
+            unitHeight = cellHeight;
+            unitWidth = cellWidth;
+            columnsCSS = `repeat(100, ${unitWidth}px)`
+        }
+        rowsCSS = `repeat(100, ${unitHeight}px)`
     }
 </script>
 <div bind:clientHeight={gridHeight} bind:clientWidth={gridWidth}

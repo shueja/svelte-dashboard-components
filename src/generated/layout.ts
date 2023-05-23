@@ -2,12 +2,13 @@ import Ajv2020 from "ajv/dist/2020"
 import * as schema from "./layout.schema.json"
 import { elementData } from "./elements";
 import { get, writable } from "svelte/store";
+import {v4 as uuid} from "uuid"
 
 import defaultLayout from "./default.json"
 console.log(schema)
 const ajv = new Ajv2020()
 console.log(elementData)
-schema.$defs.element.properties.type.enum = Object.keys(elementData);
+//schema.$defs.element.properties.type.enum = Object.keys(elementData);
 console.log(schema)
 const parse = ajv.compile(schema)
 
@@ -17,9 +18,21 @@ let layout = {
     setFromString: (json: string) => {
         console.log(json)
         let layoutObject = JSON.parse(json);
+        console.log(layoutObject)
         if (validate(layoutObject)) {
+            layoutObject.tabs.forEach(tab=>{
+                tab.elements.forEach(element=>{
+                    if(!element.hasOwnProperty("id")) {
+                        element.id = uuid();
+                    }
+
+                })
+            })
             set(layoutObject)
             console.log(layoutObject);
+        }
+        else {
+            console.error("Unable to update layout to ", layoutObject)
         }
     },
     deepSet: (newLayout: Layout) => {
@@ -31,7 +44,7 @@ export default layout;
 
 export let save = () => {
     async function saveLayout() {
-        window.localStorage.setItem("frc-dashboard-layout", JSON.stringify(get(layout)))
+        window.localStorage.setItem("frc-dashboard-layout", JSON.stringify(get(layout), (key,value)=>(key==="id"? undefined: value)))
     }
     return saveLayout();
 }
@@ -41,7 +54,7 @@ export let validate = (unvalidatedJson) => {
         return true;
     }
     else {
-        console.warn(parse.errors) // error message from the last parse call
+        console.error(parse.errors) // error message from the last parse call
         //console.error(parse.position) // error position in string
         return false;
     }
@@ -59,6 +72,7 @@ export type DashboardElement = {
     type: string, // The type declaration has less specificity than the schema because we might add elements at runtime
     data: string | Array<string>,
     layout: ElementLayout,
+    id : number,
     meta: any
 }
 export type ElementLayout = {

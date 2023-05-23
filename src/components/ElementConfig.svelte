@@ -10,11 +10,11 @@
     let x = subStore(config, c=>c.layout.x);
     let name = transactionStore<String>(subStore(config, c=>c.name))
     let type = transactionStore<String>(subStore(config, c=>c.type))
+    let data = transactionStore<String | Array<String>>(subStore(config, c=>c.data))
 </script>
 <div style="width:100%">
-<button on:click={()=>$x--}/>
-<button on:click={()=>$x++}/>
 <input type="text" bind:value={$name} on:focusout={name.commit} on:change={name.commit}/>
+<input type="text" bind:value={$data} on:focusout={data.commit} on:change={data.commit}/>
 <select bind:value={$type} on:change={type.commit}>
     {#each Object.keys(elementData) as type}
         <option value={type}>{type}</option>

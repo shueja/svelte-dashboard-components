@@ -8,8 +8,8 @@
     export let layout : Writable<Layout>;
 </script>
 
-<GridLayout rows={9} columns={12} showLines={false}>
+
     {#each $layout.tabs as _, i}
     <GeneratedTab layout={subStore(layout, layout=>layout.tabs[i])}/>
     {/each}
-</GridLayout>
+
