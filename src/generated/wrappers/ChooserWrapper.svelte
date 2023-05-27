@@ -1,4 +1,5 @@
 <script>
+
     export let data;
     export let name = "Chooser";
     import NT from "svelte-web-components/util/NT";
@@ -6,6 +7,21 @@
     let options = NT.NTStringArray([], `${data.replace(/\/$/, '')}/options`);
 	let selected = NT.NTString("", `${data.replace(/\/$/, '')}/selected`)
 	let active = NT.NTString("", `${data.replace(/\/$/, '')}/active`)
+</script>
+<script context="module" lang="ts">
+    import type {WidgetDefinition} from "../elementTypeDefs"
+    export let config : WidgetDefinition = {
+        "name": "Chooser",
+        "id": "chooser",
+        "data": {
+                type: "string",
+                default: "/",
+                description: "The path to the NT table for the chooser"
+            },
+        "properties": {
+            
+        }
+    };
 </script>
 
 <frc-sendable-chooser options={$options} active={$active} default={$active} label={name}

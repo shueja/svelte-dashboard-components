@@ -10,7 +10,8 @@
     import {addElement} from "./generated/elements"
     import { subStore } from "immer-loves-svelte";
     import SelectionLayer from "./components/select/SelectionLayer.svelte";
-    addElement("grid", PlumbedGrid);
+    import { afterUpdate } from "svelte";
+    //addElement("grid", PlumbedGrid);
 
     // This exists to be able to trigger a full dashboard rerender when opening a new layout file.
     let nonce = 0;
@@ -26,7 +27,7 @@
         
 
         layout.setFromString(json)
-        console.log($layout);
+        console.log("after parsing", $layout);
         nonce ++;
         return json
     }
@@ -42,6 +43,7 @@
 
     let json = NT.NTString("{}", "/SmartDashboard/json")
     let inConfigMode = false;
+    afterUpdate(()=>{console.warn("Rendering Full App")})
 </script>
 {#key nonce}
 <div style="width:100%; height:100%; display:flex">

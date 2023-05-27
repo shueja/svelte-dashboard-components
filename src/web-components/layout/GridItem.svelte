@@ -5,6 +5,8 @@
     export let y : number | undefined = undefined;
     export let height :number = 1;
     export let width : number = 1;
+    export let onAutoPlace = (x, y)=>{};
+    console.log("grid item", width, height)
     $: autoPlace = (x === undefined) || (y === undefined)
     let css = ""
     $: {
@@ -31,10 +33,7 @@
         let actualY = relativeYPx / boxSize; // px / (px / squares) = squares
         console.log ("actual Y", actualY)
         actualY = Math.floor (actualY + 0.5) + 1;
-
-        x = actualX;
-        y = actualY;
-
+        onAutoPlace(actualX, actualY) 
     }
     )
 

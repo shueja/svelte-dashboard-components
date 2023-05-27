@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.IntegerEntry;
@@ -57,6 +58,7 @@ public class Robot extends TimedRobot {
     countEntry.set(count);
     SmartDashboard.putData(field);
     SmartDashboard.putNumber("matchTime", DriverStation.getMatchTime());
+    CameraServer.startAutomaticCapture();
   }
 
   /**

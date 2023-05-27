@@ -49,7 +49,7 @@ export default {
 			},
 			preprocess: preprocess()
 		}),
-		typescript({ sourceMap: !production, resolveJsonModule:true }),
+		typescript({ sourceMap: !production, resolveJsonModule:true, lib: ["es2016", "dom"], allowSyntheticDefaultImports:true}),
 
 		// we'll extract any component CSS out into
 		// a separate file - better for performance

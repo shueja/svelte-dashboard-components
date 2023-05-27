@@ -4,7 +4,6 @@
     import layout, { Tab } from '../../generated/layout';
     import { Writable } from "svelte/store";
     import {onMount} from "svelte"
-    import SelectionComponent from './SelectionComponent.svelte';
     import "gridstack/dist/gridstack.min.css";
     import "./gs.css"
 
@@ -12,7 +11,6 @@
 import GridStack from "gridstack/dist/gridstack-all";
 import "gridstack/dist/h5/gridstack-dd-native"; //  HTML5 drag&drop
     import { subStore } from 'immer-loves-svelte';
-    import { elementData } from '../../generated/elements';
     export let tab : Writable<Tab>;
     export let selectedIndex = 0;
 	
@@ -26,13 +24,13 @@ import "gridstack/dist/h5/gridstack-dd-native"; //  HTML5 drag&drop
         y: element.layout.y - 1,
         h: element.layout.height,
         w: element.layout.width, id:element.id, locked:true,
-    content:`<div onclick=\"select(${i})\" style=\"background:rgba(77, 77, 110, 0.4); height:100%; width:100%\"></div>`}
-    ));
-    if (grid !== null) {
-    grid.load(items, true)
-    }
-
+        content:`<div onclick=\"select(${i})\" style=\"background:rgba(77, 77, 110, 0.4); height:100%; width:100%\"></div>`}
+        ));
+        if (grid !== null) {
+            console.log(items)
+            grid.load(items, true)
         }
+    }
 
     let layoutStore = {}
     $: $elements.forEach((element, i) => (
@@ -77,7 +75,7 @@ onMount(()=>{
                 w.set(node.w);
                 h.set(node.h);
                 });
-        console.log(grid)
+        console.log(items)
         grid.load(items, true)
 
         // In GridStack 3 we use "w" instead of "width"

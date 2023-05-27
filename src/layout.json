@@ -12,9 +12,7 @@
           "width":9,
           "height":3
         },
-        "meta": {
-              "ip":"https://google.com"
-        }
+        "meta": {}
       },
       {
         "name": "Auto Chooser",

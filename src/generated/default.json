@@ -12,8 +12,11 @@
           "width":3,
           "height":2
         },
-        "gyro": {
+        "meta": {
+           "gyro": {
             "units": "radians"
+           }
+
         }
       },
       {
@@ -31,11 +34,14 @@
         "name": "Wheel Velocities",
         "type": "graph",
         "data": "drive/leftVelocity",
-        "graph": {
-          "limits": {
-            "x": [0, 10],
-            "y": [-50, 50]
+        "meta": {
+          "graph": {
+            "limits": {
+              "x": [0, 10],
+              "y": [-50, 50]
+            }
           }
+
         },
         "layout": {
           "width":2,

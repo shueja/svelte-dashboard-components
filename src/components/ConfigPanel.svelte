@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Writable, derived, get } from "svelte/store";
-    import { DashboardElement, Layout, save } from "../generated/layout";
+    import { DashboardElement, Layout, addWidget, save } from "../generated/layout";
     import ElementConfig from "./ElementConfig.svelte";
     import { subStore } from "immer-loves-svelte";
     import { afterUpdate } from "svelte";
@@ -21,16 +21,7 @@
 {#if expanded}
 <div style="width:200px; height:100%; background-color: white">
     <button on:click={()=>save()}> Save Layout</button>
-    <button on:click={()=>$elements = [...$elements, {
-        name: "New Element",
-        type: "drive",
-        data: "",
-        layout: {x: undefined, y : undefined, width: 1, height: 1},
-        meta: {},
-        id: uuid()
-    }
-
-]}> +</button>
+    <button on:click={()=>addWidget(selectedTab,"fms-info")}>+</button>
 <button on:click={()=>{$elements = $elements.toSpliced(selectedIndex, 1); selectedIndex = 0;}}>Del</button>
 {#key selectedIndex}
     <ElementConfig config={selectedElementStore}/>
