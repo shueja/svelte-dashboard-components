@@ -1,4 +1,5 @@
 <script>
+    import "carbon-components-svelte/css/g80.css";
     import GridItem from "svelte-web-components/layout/GridItem.svelte";
 	import GridLayout from "svelte-web-components/layout/GridLayout.svelte";
 	import NT from "svelte-web-components/util/NT";
@@ -6,12 +7,12 @@
     import DashboardRenderer from "./generated/DashboardRenderer.svelte";
     import layout, {validate} from "./generated/layout"
     // Add custom elements for code-driven layouts
-    import PlumbedGrid from "./PlumbedGrid.svelte";
+    import * as PlumbedGrid from "./PlumbedGrid.svelte";
     import {addElement} from "./generated/elements"
     import { subStore } from "immer-loves-svelte";
     import SelectionLayer from "./components/select/SelectionLayer.svelte";
     import { afterUpdate } from "svelte";
-    //addElement("grid", PlumbedGrid);
+    addElement("grid", PlumbedGrid.default, PlumbedGrid.config);
 
     // This exists to be able to trigger a full dashboard rerender when opening a new layout file.
     let nonce = 0;
@@ -45,9 +46,10 @@
     let inConfigMode = false;
     afterUpdate(()=>{console.warn("Rendering Full App")})
 </script>
+
 {#key nonce}
 <div style="width:100%; height:100%; display:flex">
-    <ConfigPanel layout={layout} selectedTab={0} selectedIndex={selectedIndex} expanded={inConfigMode}></ConfigPanel>
+    <ConfigPanel layout={layout} selectedTab={0} bind:selectedIndex expanded={inConfigMode}></ConfigPanel>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div style="flex: 0 0 1; width:10px; min-width:10px; height:100%;background:rgb(100, 100, 100)" on:click={()=>inConfigMode = !inConfigMode}> >>></div>
     <div style="flex-grow:1">

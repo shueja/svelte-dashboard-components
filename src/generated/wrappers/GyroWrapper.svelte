@@ -21,6 +21,10 @@
             },
         "properties": {
 
+        },
+        layout:{
+            minHeight: 4,
+            minWidth:4
         }
     };
 </script>

@@ -32,8 +32,8 @@ export const propertyTypes = ["string", "stringarray","integer", "integerarray",
 export type PropertyDefinition<T extends PropertyType> = {
     type: T,
     default: PropertyTypeMap[T]
-    description?: String,
-    displayName?: String
+    description?: string,
+    displayName?: string
 }
 
 

@@ -7,24 +7,39 @@
     import {v4 as uuid} from "uuid";
     export let selectedTab = 0;
     export let selectedIndex = 0;
+
     $: console.log(selectedIndex)
     export let expanded = true;
     export let layout: Writable<Layout>
     let elements = subStore(layout, l=>l.tabs[0].elements);
     let selectedElementStore = subStore(elements, e=>e[selectedIndex]);
-    $: selectedIndex, selectedElementStore = subStore(elements, e=>e[selectedIndex])
+    $: {console.log("updating selectedElementStore", selectedElementStore = subStore(elements, e=>e[selectedIndex]))}
 
     afterUpdate(()=>{
         console.log("updating config panel")
         console.log($selectedElementStore)});
 </script>
 {#if expanded}
-<div style="width:200px; height:100%; background-color: white">
+<div style="width:300px; flex-shrink:0; height:100%; background-color: grey; padding:8px">
     <button on:click={()=>save()}> Save Layout</button>
     <button on:click={()=>addWidget(selectedTab,"fms-info")}>+</button>
-<button on:click={()=>{$elements = $elements.toSpliced(selectedIndex, 1); selectedIndex = 0;}}>Del</button>
+<button on:click={()=>{
+    console.log("deleting", selectedIndex);
+    let indexToDelete = selectedIndex;
+    selectedIndex = $elements.length;
+    
+    $elements = $elements.toSpliced(indexToDelete, 1);
+    
+    //we need to manually update this because we might delete element 0 and need to relink to the new 0
+    // without Svelte thinking selectedIndex changed.
+    selectedElementStore = subStore(elements, e=>e[selectedIndex]);
+    console.log("new selectedElementStore", get(selectedElementStore))
+    console.log($layout)
+    }}>Del</button>
 {#key selectedIndex}
+    {#if selectedIndex < $elements.length}
     <ElementConfig config={selectedElementStore}/>
+    {/if}
 {/key}
 </div>
 {/if}

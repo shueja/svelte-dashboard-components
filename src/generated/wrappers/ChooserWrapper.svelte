@@ -20,6 +20,10 @@
             },
         "properties": {
             
+        },
+        "layout": {
+            minHeight: 2,
+            minWidth:4
         }
     };
 </script>

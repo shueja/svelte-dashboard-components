@@ -11,6 +11,7 @@
 import GridStack from "gridstack/dist/gridstack-all";
 import "gridstack/dist/h5/gridstack-dd-native"; //  HTML5 drag&drop
     import { subStore } from 'immer-loves-svelte';
+    import { widgetDefinitions } from '../../generated/elements';
     export let tab : Writable<Tab>;
     export let selectedIndex = 0;
 	
@@ -19,12 +20,17 @@ import "gridstack/dist/h5/gridstack-dd-native"; //  HTML5 drag&drop
     let items = [];
     Object.assign(window, {select: (newIndex) => { console.log(newIndex); selectedIndex = newIndex}});
     $: {
+        // On change to the elements array, recreate the itemlist for the selectionlayer grid.
         items = $elements.map((element, i) => (
-        {x: element.layout.x - 1,
-        y: element.layout.y - 1,
-        h: element.layout.height,
-        w: element.layout.width, id:element.id, locked:true,
-        content:`<div onclick=\"select(${i})\" style=\"background:rgba(77, 77, 110, 0.4); height:100%; width:100%\"></div>`}
+        {
+            x: element.layout.x - 1,
+            y: element.layout.y - 1,
+            h: element.layout.height,
+            w: element.layout.width,
+            id:element.id, locked:true,
+            minW:widgetDefinitions[element.type]?.config.layout?.minWidth,
+            minH:widgetDefinitions[element.type]?.config.layout?.minHeight,
+            content:`<div onclick=\"select(${i})\" style=\"background:rgba(77, 77, 110, 0.4); height:100%; width:100%\"></div>`}
         ));
         if (grid !== null) {
             console.log(items)
@@ -92,41 +98,6 @@ onMount(()=>{
 
         });
         
-
-
-// function addToGrid(element, info) {
-    
-//     console.log(grid)
-//     if (grid !== undefined && grid !== null) {
-//         grid.addWidget(element.firstChild, info)
-//     }
-//     else {
-//         widgets.push([element.firstChild, info])
-//     }
-    
-//     // In GridStack 3 we use "w" instead of "width"
-//     // const widget = grid.addWidget(element.firstChild, info);
-
-//     // // We set an id for this widget
-//     // // Then we append it manually to GridStack html element
-//     // grid.el.appendChild(widget);
-//     // // And then - we inform GridStack, that a new element is added.
-//     // grid.makeWidget(`#${info.id}`);
-
-//     return {
-//       destroy() {
-//         grid.removeWidget(widget);
-//       }
-//     };
-//   }
 </script>
 <div class="grid-stack" style="min-height:100%"></div>
-
-<!-- {#each items as item, i (item.id)}
-    <div use:addToGrid={item}>
-        svelte-ignore a11y-click-events-have-key-events
-        <div on:click={()=>selectedIndex = i} style="background:{selectedIndex == i ? "rgba(77, 77, 110, 0.4)": "rgba(77, 77, 77, 0.4)"}">{item.id}</div>
-    </div>
-{/each} -->
-
 

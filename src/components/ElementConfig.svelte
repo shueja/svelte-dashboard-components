@@ -1,6 +1,6 @@
 <script lang="ts">
     import {hashCode} from "../util/hash" 
-    import { subStore, transactionStore} from "immer-loves-svelte";
+    import { TransactionStore, subStore, transactionStore} from "immer-loves-svelte";
     import { Writable, get } from "svelte/store";
     import { DashboardElement, changeWidgetType } from "../generated/layout";
     import {widgetDefinitions} from "../generated/elements";
@@ -30,9 +30,31 @@
     // The mapping of types to config elements 
     let configComponents = 
     {string: StringConfig, integer:IntegerConfig}
+
+    let dataStore = (transactionStore(subStore(config, c=>(c.data))) as TransactionStore<string>)
+
 </script>
 <div style="width:100%">
-<input type="text" bind:value={$name} on:focusout={name.commit} on:change={name.commit}/>
+<StringConfig propertyDefinition={
+    {
+        type:"string",
+        default:widgetDefinition.name.toString(),
+        description: "The display name of the element",
+        displayName: "Name"
+    }} store={
+
+        transactionStore(subStore(config, c=>c.name))}></StringConfig>
+{#if widgetDefinition.data.type === "string" && typeof $config.data === "string"} 
+<StringConfig propertyDefinition={
+    {
+        type:"string",
+        default:widgetDefinition.data.toString(),
+        description: "The data source of the element",
+        displayName: "Source"
+    }} store={
+    dataStore}></StringConfig>
+{/if}
+<!-- <input type="text" bind:value={$name} on:focusout={name.commit} on:change={name.commit}/> -->
 <input type="text" bind:value={$data} on:focusout={data.commit} on:change={data.commit}/>
 {JSON.stringify(widgetDefinition)}
 <select bind:value={$type} on:change={(e)=>changeWidgetType(config, e.currentTarget.value)}>
@@ -41,12 +63,12 @@
     {/each}
 </select>
 {#key Object.keys($config.meta[get(type).toString()])}
-{#each Object.keys(widgetDefinition.properties) as option (hashCode(option))}
-    <svelte:component
-        this={configComponents[widgetDefinition.properties[option].type]}
-        propertyDefinition={widgetDefinition.properties[option]}
-        store={transactionStore(subStore(config, c=>c.meta[$type.toString()][option]))}
-        ></svelte:component>
-{/each}
+    {#each Object.keys(widgetDefinition.properties) as option (hashCode(option))}
+        <svelte:component
+            this={configComponents[widgetDefinition.properties[option].type]}
+            propertyDefinition={widgetDefinition.properties[option]}
+            store={transactionStore(subStore(config, c=>c.meta[$type.toString()][option]))}
+            ></svelte:component>
+    {/each}
 {/key}
 </div>

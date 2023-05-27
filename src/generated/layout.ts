@@ -1,4 +1,4 @@
-import Ajv2020 from "ajv/dist/2020"
+//import Ajv2020 from "ajv/dist/2020"
 import * as schema from "./layout.schema.json"
 import { widgetDefinitions } from "./elements";
 import { get, Writable, writable } from "svelte/store";
@@ -9,11 +9,11 @@ import { PropertyDefinition, propertyTypes, WidgetDefinition } from "./elementTy
 import { subStore } from "immer-loves-svelte";
 import { Substore } from "immer-loves-svelte/build/main/lib/subStore";
 console.log(schema)
-const ajv = new Ajv2020()
-console.log(widgetDefinitions)
-//schema.$defs.element.properties.type.enum = Object.keys(elementData);
-console.log(schema)
-const parse = ajv.compile(schema)
+// const ajv = new Ajv2020()
+// console.log(widgetDefinitions)
+// //schema.$defs.element.properties.type.enum = Object.keys(elementData);
+// console.log(schema)
+// const parse = ajv.compile(schema)
 
 const {set, subscribe, update} : Writable<Layout> = writable({tabs: [{name:"New Tab", elements: []}]})
 
@@ -195,14 +195,15 @@ export let save = () => {
 }
 
 export let validate = (unvalidatedJson) => {
-    if (parse(unvalidatedJson)) {
-        return true;
-    }
-    else {
-        console.error(parse.errors) // error message from the last parse call
-        //console.error(parse.position) // error position in string
-        return false;
-    }
+    return true;
+    // if (parse(unvalidatedJson)) {
+    //     return true;
+    // }
+    // else {
+    //     console.error(parse.errors) // error message from the last parse call
+    //     //console.error(parse.position) // error position in string
+    //     return false;
+    // }
 }
 
 export type Layout = {
